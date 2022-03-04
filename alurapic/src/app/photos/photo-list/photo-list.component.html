@@ -1,0 +1,8 @@
+<!-- quando voce usar o search na aplicação, ele vai disparar um evento customizado(criado por mim) chamado onTyping, o input digitado sera o $event,
+esse $event vai ser passado para filter de photo-list.component -->
+<!-- para limpar o filtro de busca, foi feito um data binding do [value] com o filter -->
+<app-search (onTyping)="filter = $event" [value]="filter"></app-search>
+
+<app-photos [photos]="photos | filterByDescription: filter"></app-photos>
+
+<app-load-button (click)="load()" [hasMore]="hasMore"></app-load-button>

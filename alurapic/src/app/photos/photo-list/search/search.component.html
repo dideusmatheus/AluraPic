@@ -1,0 +1,9 @@
+<div class="text-center mt-3 mb-3">
+  <form appDarkenOnHover>
+    <i class="fa fa-search mx-2" aria-hidden="true"></i>
+    <!-- botao para pesquisar imagem -->
+    <input class="rounded" type="search" placeholder="search..." autofocus
+      (keyup)="debounce.next($any($event.target).value);"
+      [value]="value">
+  </form>
+</div>

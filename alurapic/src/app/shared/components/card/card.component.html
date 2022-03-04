@@ -1,0 +1,9 @@
+<!-- estrutura do card para usar na apresentação das fotos -->
+<div class="card border-light text-center  mb-4">
+  <!-- onde ta o title ele vai pegar do card.component -->
+  <h4 class="card-header">{{ title }}</h4>
+  <div class="card-block text-justify">
+    <!-- aqui entra o conteúdo, as imagens e para isso deve-se fazer -->
+    <ng-content></ng-content>
+  </div>
+</div>
