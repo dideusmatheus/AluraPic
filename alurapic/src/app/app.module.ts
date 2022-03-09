@@ -1,3 +1,4 @@
+
 // angular imports
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +9,7 @@ import { AppComponent } from './app.component';
 import { PhotosModule } from './photos/photos.module';
 import { AppRoutingModule } from './app.routing.module';
 import { ErrorsModule } from './errors/errors.module';
-import { HomeModule } from './home/home.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   // os modulos dentro de declarations so funcionanam dentro dos modulos do declarations
@@ -16,11 +17,11 @@ import { HomeModule } from './home/home.module';
     AppComponent,
    ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    BrowserModule,    
     PhotosModule,
     ErrorsModule,
-    HomeModule
+    CoreModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
