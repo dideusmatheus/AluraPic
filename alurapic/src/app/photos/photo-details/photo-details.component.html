@@ -16,7 +16,8 @@
         <div class="d-flex bd-highlight align-bottom">
           <i class="fa fa-comment-o fa-2x mx-1 text-primary bd-highlight"></i> 
           <i class=" mx-1 bd-highlight fs-4">{{ photo.comments }}</i>
-          <i (click)="remove()" class="fa fa-trash-o fa-2x text-danger ms-auto p-2 bd-highlight"></i>
+          <!-- 28CC- incluir photoOwnerOnly [ownedPhoto]="photo", depois ir ate photo-owner-only.directive -->
+          <i photoOwnerOnly [ownedPhoto]="photo" (click)="remove()" class="fa fa-trash-o fa-2x text-danger ms-auto p-2 bd-highlight"></i>
       </div>
       <hr>
       </small>

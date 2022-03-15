@@ -25,7 +25,7 @@ export class PhotoDetailsComponent implements OnInit {
 
   //21BB- chama o photoservice e crie uma propriedade
   //20CC- chamando o route
-  //27EE- chama o router
+  //27EE- chama o router, depois criar uma pasta no photo-details de photo-owner-only e criar a directive
   constructor(private route: ActivatedRoute, private photoService: PhotoService, private router: Router) { }
 
   //20DD- o id recebe o id da foto que o usuario clicou, o photoId tem que ser o mesmo da rota p/:photoId no app.routing.module.ts, depois vai para photo;service;ts
