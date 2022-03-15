@@ -1,0 +1,23 @@
+<!-- 23AA- criando o template dos comentarios, depois importar o RouterModule no photo,details.module.ts -->
+<div *ngIf="(comments$ | async) as comments">
+  <!-- 25CC- coloque comment-list, para criar a barra de navegação do scrow pra baixo, depois vamos fazer a permissão dos comentarios em photo-details.component.html-->
+  <ul class="list-unstyled comment-list" >
+    <li *ngFor="let comment of comments">
+      <a class="text-dark font-weight-bold mx-2" [routerLink]="['/user', comment.userName]">{{comment.userName}}:</a>
+      <em>{{ comment.date | date:'dd-MM-yyyy HH:mm' }}</em>
+      <i class="fa fa-trash-o text-danger ms-auto p-2 bd-highlight"></i>
+      <p class="break-word mb-2">{{comment.text}}</p>
+    </li>
+  </ul>
+  <!-- 23GG- colocar o [formGroup]="commentForm" e depois o  formControlName="comment", depois importa o vmessage no photo-details.module.ts-->
+  <form [formGroup]="commentForm" (submit)="save()">
+    <div class="input-group">
+      <textarea formControlName="comment" class="form-control"></textarea>
+      <div class="input-group">
+        <button [disabled]="commentForm.invalid" class="btn btn-primary my-2">Publish</button>
+      </div>
+    </div>
+    <!-- 23II- mensagem para o comentario, depois colocar o button desabilidade [disabled]="commentForm.invalid"..... depois vá para photo.servce.ts -->
+    <app-vmessagem text="Maximun size allowed is 300" *ngIf="commentForm.get('comment').errors?.['maxlength']"></app-vmessagem>  
+  </form>
+</div>

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class SignInComponent implements OnInit {
 
     loginForm: FormGroup;
-    @ViewChild('userNameInput') userNameInput: ElementRef<HTMLInputElement>;
+    @ViewChild('userNameInput') userNameInput: ElementRef;
 
     constructor(private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -26,11 +26,17 @@ export class SignInComponent implements OnInit {
         this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
     }
 
+    ngAfterViewInit() {
+
+    }
+
     login() {
         const userName = this.loginForm.get('userName').value;
         const password = this.loginForm.get('password').value;
         this.authService.authenticate(userName, password).subscribe({
-            next: () => this.router.navigate(['user', userName]),
+            next: () => {
+                this.router.navigate(['user', userName]);
+            },            
 
             error: err => {
                 console.log(err);

@@ -4,17 +4,20 @@
 <ol class="list-unstyled">
   <li *ngFor="let cols of rows" class="row g-2">
     <div *ngFor="let photo of cols" class="col-4" appDarkenOnHover>
-      <!-- coloca a foto e os icones dentro do card feito -->
-      <!-- para pegar o nome de cada foto deve ser o [], caso contrario vai aparecer photo.description em todas as imagens -->
-      <app-card [title]="photo.description">
-        <app-photo [url]="photo.url" [description]="photo.description!"></app-photo>
-        <div class="text-center p-1">
-          <!-- icones de coração e comentarios tirados da font-awesome e utilizaçao de classes do bootstrap -->
-          <!-- depois é feito um data binding atravez de interpolação para os likes e commentens -->
-          <i aria-hidden="true" class="fa fa-heart-o fa-1x mx-2"></i>{{ photo.likes }}
-          <i aria-hidden="true" class="fa fa-comment-o fa-1x mx-2 "></i>{{ photo.comments }}
-        </div>
-      </app-card>
+      <!-- 20BB- criando uma tag a para o card de fotos, e coloque o [routerLink]="['/p', photo.id]", depois vá para photo-details.component.ts -->
+      <a class="text-decoration-none text-black font-monospace" [routerLink]="['/p', photo.id]">
+        <!-- coloca a foto e os icones dentro do card feito -->
+        <!-- para pegar o nome de cada foto deve ser o [], caso contrario vai aparecer photo.description em todas as imagens -->
+        <app-card [title]="photo.description">
+          <app-photo [url]="photo.url" [description]="photo.description!"></app-photo>
+          <div class="text-center p-1">
+            <!-- icones de coração e comentarios tirados da font-awesome e utilizaçao de classes do bootstrap -->
+            <!-- depois é feito um data binding atravez de interpolação para os likes e commentens -->
+            <i aria-hidden="true" class="fa fa-heart-o fa-1x mx-2"></i>{{ photo.likes }}
+            <i aria-hidden="true" class="fa fa-comment-o fa-1x mx-2 "></i>{{ photo.comments }}
+          </div>
+        </app-card>
+      </a>
     </div>
   </li>
 </ol>

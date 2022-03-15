@@ -1,5 +1,5 @@
 <!-- 55A- formulario de singup , depois vá ate aap.routing pra fazer a rota do singup -->
-<h4 class="text-center mt-3"> Register to embrace a new world!</h4>
+<h4 class="text-center mt-3 font-monospace"> Register to embrace a new world!</h4>
 
 <!-- 55G- fazer a ligação com as validações feita no singup.ts (utilizando primeiro o [formGroup]="singupForm", depois para cada input o formControlName="email" ) -->
 <form [formGroup]="singupForm" (submit)="singup()" class="form mt-4" >
@@ -26,8 +26,7 @@
   <div class="form-group mx-2 mb-3">
     <input formControlName="userName" placeholder="user name" class="form-control">
     <!-- 55H- manda a mensagem para cada validação feita no singup.ts -->
-    <app-vmessagem text="User name is required!" *ngIf="singupForm.get('userName').errors?.['required']">
-    </app-vmessagem> <!-- Validators.required -->
+    <app-vmessagem text="User name is required!" *ngIf="singupForm.get('userName').errors?.['required']"></app-vmessagem> <!-- Validators.required -->
     <!-- <app-vmessagem text="Must be lower case!" *ngIf="singupForm.get('userName').errors?.['pattern']"></app-vmessagem> Validators.pattern(/^[a-z0-9_\-]+$/) -->
     <!-- 55I- sera criado a validação na mão, para isso vá ate lower-case.validators.ts -->
     <app-vmessagem text="Must be lower case!" *ngIf="singupForm.get('userName').errors?.['lowerCase']"></app-vmessagem>
@@ -56,5 +55,5 @@
   </div>
 
   <!-- text -->
-  <p class="mx-3">Already a user?<a [routerLink]="['']"> Sign In!</a></p>
+  <p class="mx-3 font-monospace">Already a user? <a class="text-primary" [routerLink]="['']">Sign In!</a></p>
 </form>

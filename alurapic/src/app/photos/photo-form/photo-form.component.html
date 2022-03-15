@@ -1,1 +1,65 @@
-<p>photo-form works!</p>
+<!-- 1DA- criando o template do formulario, depois vá para photo-form.component.ts -->
+<div class="my-4">
+  <!-- 3EE - coloque [formGroup]="photoForm" -->
+  <!-- 2FF- coloque o (submit)="upload()" e depois voltei para photo-form.component.ts-->
+  <form [formGroup]="photoForm" class="row mx-5" (submit)="upload()">
+    <!-- input da foto, lado esquerdo -->
+    <div class="col-md-5 text-center mb-3">
+      <!-- 17EE- colocando dentro da div para mostrar somente se nao tiver feito do preview, depois fazer uma *ngIF e depois vá para photo-form.module.ts -->
+      <div class="form-group" *ngIf="!preview; else previewImage">
+
+        <!-- 16BB- criando o botao, depois ative o fileinput quando o usuario clickar na imagem -->
+        <!-- 18DD- coloque o appImmediateClick no btn, depois crie o auth.guard.ts -->
+        <button appImmediateClick type="button" (click)="fileInput.click()" class="btn btn-primary"><i class="fa fa-image fa-4x align-middle"></i></button>
+        <!-- 4EE- coloque o formControlName="file" -->
+        <!-- 4FF- colocar o  (change)="file = ($any($event).target.files), depois volte para photo-form.component.ts "-->
+        <!-- 16AA- coloque o hiiden, para ocultar o input abaixo, depois de o nome para o input de #fileInput e crie o botao a cima -->
+        <!-- 17AA- altere o file = ($any($event).target.files[0]) para handleFile(($any($event).target.files[0])) e depois crie o metodo handleFile no photo-form.component.ts -->
+        <input #fileInput hidden formControlName="file" type="file" accept="image/*" (change)="handleFile(($any($event).target.files[0]))"><!-- image/* é pra aceitar so imagem, seria parecido com um filtro -->
+        <!--6EE- exibir as mensagens de validação -->
+        <app-vmessagem text="Please, select a photo." *ngIf="photoForm.get('file').errors?.['required']"></app-vmessagem>
+      </div>
+
+      <!-- 17GG- criando a condição para mostrado caso o *ngIf="!preview; else previewImage" der falso, depois disso vamos criar a diretica de immediate-click -->
+      <ng-template #previewImage>
+        <div class="text-center">
+          <app-photo [url]="preview" title="Preview"></app-photo>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- lado direito -->
+    <div class="col-md-7">
+      <!-- input da descrição da foto -->
+      <div class="form-group">
+        <!-- 4EE- coloque o formControlName="description" -->
+        <textarea formControlName="description" class="form-control form-control-sm"
+          placeholder="photo description"></textarea>
+        <!--6EE- exibir as mensagens de validação, depois vai ate photo-form.component.ts -->
+        <app-vmessagem text="Please, enter a description." *ngIf="photoForm.get('description').errors?.['required']">
+        </app-vmessagem>
+        <app-vmessagem text="Max length is 50." *ngIf="photoForm.get('description').errors?.['maxlength']">
+        </app-vmessagem>
+      </div>
+
+      <!-- input dcheckbox -->
+      <div class="form-group my-3">
+        <label class="text-muted font-monospace">
+          Allow comments
+          <!-- 4EE- coloque o formControlName="allowComments" -->
+          <input formControlName="allowComments" type="checkbox">
+        </label>
+      </div>
+
+      <!-- buttom de upload e cancel -->
+      <div class="d-grid gap-2">
+        <!-- 5EE- coloque o [disabled]="photoForm.invalid" -->
+        <button [disabled]="photoForm.invalid" type="submit" class="btn btn-primary btn-block font-monospace">
+          Upload
+        </button>
+        <a class="btn btn-secondary font-monospace ">Cancel</a>
+      </div>
+
+    </div>
+  </form>
+</div>

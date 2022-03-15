@@ -1,4 +1,4 @@
-<h4 class="text-center mt-3">Login</h4>
+<h4 class="text-center mt-3 font-monospace">Login</h4>
 
 <form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
 
@@ -14,11 +14,11 @@
 
 
   <div class="d-grid gap-2">
-    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary  mb-2 mx-2">
-      login
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary font-monospace mb-2 mx-2">
+      Login
     </button>
   </div>
 </form>
 
 <!-- 59D- foi criado o [routerLink]="['singup'], depois foi melhorado o focus em signin.ts-->
-<p class="mx-2">Not a user?<a [routerLink]="['singup']"> Register now</a></p>
+<p class="mx-2 font-monospace">Not a user? <a class="text-primary" [routerLink]="['singup']">Register now</a></p>

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -22,7 +23,9 @@ import { DarkenOnHoverModule } from 'src/app/shared/directives/darken-on-hover/d
     CommonModule,
     PhotoModule,
     CardModule,
-    DarkenOnHoverModule
+    DarkenOnHoverModule,
+    //20AA- EXTRAINDO PARAMENTROS DE ROAS
+    RouterModule //20AA- importa esse module e depois vá para photos.component.html
   ]
 })
 export class PhotoListModule { }

@@ -10,7 +10,7 @@ import { lowerCaseValidator } from 'src/app/shared/validators/lower-case.validat
 @Component({
   selector: 'app-singup',
   templateUrl: './singup.component.html',
-  providers: [ UserNotTakenValidatorService ],
+  providers: [UserNotTakenValidatorService],
   styleUrls: ['./singup.component.scss']
 })
 export class SingupComponent implements OnInit {
@@ -18,14 +18,14 @@ export class SingupComponent implements OnInit {
   //52C- criando o:
   singupForm: FormGroup;
   //59G- para fazer o focus, deve usar o @ViewChild('inputEmail')
-  @ViewChild('emailInput') emailInput: ElementRef<HTMLInputElement>;  
-  
+  @ViewChild('emailInput') emailInput: ElementRef<HTMLInputElement>;
+
   constructor(private formBuilder: FormBuilder,//52D- incluindo o formBuilder
     private userNotTakenValidatorService: UserNotTakenValidatorService,//57E- importando o userNotTakenValidatorService
     private singupService: SingupService,//58D- importar o singupService
     private router: Router,
     private platformDetectorService: PlatformDetectorService //59H- importanto o PlatformDetectorService
-    ) { }
+  ) { }
 
   //52E- montar o formulario e suas validações
   ngOnInit() {
@@ -64,8 +64,9 @@ export class SingupComponent implements OnInit {
     });
 
     //59I- copiando o codigo para realizar o focus no email ao iniciar, depois vamos fazer a impleentação do Lazy loading... vá para app.rount.module.ts
-    this.platformDetectorService.isPlatformBrowser() && this.emailInput.nativeElement.focus();
+    //this.platformDetectorService.isPlatformBrowser() && this.emailInput.nativeElement['focus()'];
   }
+
 
   //58- SUBMISSÃO DOS DADOS
   singup() {

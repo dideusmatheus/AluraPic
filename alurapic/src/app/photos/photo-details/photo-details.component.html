@@ -1,0 +1,36 @@
+<!-- 21DD- fazendo o template, depois importe o photoModule em photo-details.module.ts  -->
+<!-- 21HH- fazer o *ngIf="(photo$ | async) as photo", feito isso foi criado o break-qork no photo-details.component.css -->
+<div class="bg-white my-3 mx-4" *ngIf="(photo$ | async) as photo">
+
+  <div class="row font-monospace">
+    <div class="col-6 my-2">
+      <app-photo [url]="photo.url" [description]="photo.description"></app-photo>
+    </div>
+
+    <div class="col-6 text-center">
+      <small>
+        <p class=" break-word mx-2 fs-2"> {{photo.description}}</p>
+        <!-- 27AA- BOTÃO DE DELETE IMAGE -->
+        <!-- 27AA- colocando o botao(icone) de deletar icone e de comentarios, utilizando o template abaixo, depois vamos criar o metodo delete em photo.service.ts-->
+        <!-- 27CC- coloque o (click)="remove()", depois vá para photo-details.component.ts -->
+        <div class="d-flex bd-highlight align-bottom">
+          <i class="fa fa-comment-o fa-2x mx-1 text-primary bd-highlight"></i> 
+          <i class=" mx-1 bd-highlight fs-4">{{ photo.comments }}</i>
+          <i (click)="remove()" class="fa fa-trash-o fa-2x text-danger ms-auto p-2 bd-highlight"></i>
+      </div>
+      <hr>
+      </small>
+
+      <!-- 26AA- PERMISSÃO DE COMENTARIOS -->
+      <!-- 26AA- coloque o *ngIf="photo.allowComments; else warnning" -->
+      <!-- 22KK- usando o photo-components e usando o  [photoId]="photoId", depois vá para photo-detals.componene.ts-->
+      <app-photo-comments *ngIf="photo.allowComments; else warnning" [photoId]="photoId"></app-photo-comments>
+
+      <!-- 26BB- faz o ng-template para sair do ngIf -->
+      <ng-template #warnning>
+        <p>User has disable comments for this photo!</p>
+      </ng-template>
+    </div>
+
+  </div>
+</div>

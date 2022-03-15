@@ -1,3 +1,6 @@
+import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
+import { AuthGuard } from './core/auth/auth.guard';
+
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -40,7 +43,12 @@ const routes: Routes = [
   },
   {
     path: 'p/add',
-    component: PhotoFormComponent
+    component: PhotoFormComponent,
+    canActivate: [AuthGuard] //19BB- adiciona essa linha de comando para a rota p/add, depois foi criado um component chamado photo-details, vá para photo.module.ts
+  },
+  {
+    path: 'p/:photoId', //19DD- criar essa rota, usando o :photoId como coringa (para acessar a rota do id da imagem quando clicado), para isso vá ate photo-list-module.ts
+    component: PhotoDetailsComponent,
   },
   {
     path: '**',

@@ -1,4 +1,4 @@
-import { AuthGuard } from './../core/auth/auth.guard';
+import { LoginGuard } from './../core/auth/login.guard';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './singin/singin.component';
@@ -11,7 +11,7 @@ const routes: Routes = [
     {
         path: '',
         component: HomeComponent, //59B- foi criado essa nota rota, com o homeComponent
-        canActivate: [AuthGuard],//52D- coloque o canActivate: [AuthGuard], feito isso vá para header.html para fazer a rota de login
+        canActivate: [LoginGuard],//52D- coloque o canActivate: [AuthGuard], feito isso vá para header.html para fazer a rota de login
         children: [ // 59C- o signin e signup foi passado para as rotas children (o home e o signin tem o mesmo path porque os dois que seram mostrados primeiramente, depois vá ate singin.html)
             {
                 path: '',
