@@ -1,3 +1,5 @@
-# Alurapic - parte 2
+# Alurapic 
 
-Visualize a branch master.
+
+Branch master: parte 2 do curso.
+Branch xxxxx: parte 3 do curso.
