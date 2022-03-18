@@ -1,3 +1,4 @@
+import { LoadingModule } from './../shared/loading/loading.module';
 import { AlertModule } from './../shared/components/alert/alert.module';
 
 import { FooterComponent } from './footer/footer.component';
@@ -15,6 +16,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
         CommonModule,
         RouterModule,
         AlertModule, //29GG- importar o alertModule depois volte para alert.component.ts
+        LoadingModule //4EEE- importar o loadingmodule e depois vá para header.component.html
     ],
     declarations: [
         HeaderComponent,

@@ -61,7 +61,8 @@
         <!-- 2EEE- colocar a router link no botao de cancel -->
         <a [routerLink]="['']" class="btn btn-secondary font-monospace ">Cancel</a>
       </div>
-      <!-- 2GGG- fazer o template para quando nao entrar no if -->
+      <!-- 2GGG- fazer o template para quando nao entrar no if, depois vai ser feito uma barra de carregamento e para isso foi criar em shared o loading 
+      (primeiro foi feito o loading-type.ts) -->
       <ng-template #percent>
         <div class="text-center display-3">
           Uploading {{ percentDone}}
