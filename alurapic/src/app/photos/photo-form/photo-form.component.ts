@@ -1,3 +1,4 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AlertService } from './../../shared/components/alert/alert.service';
 import { Router } from '@angular/router';
 import { PhotoService } from './../photo/photo.service';
@@ -19,6 +20,9 @@ export class PhotoFormComponent implements OnInit {
   file: File;
   //17CC- criando a preview e voltei pra função handleFile
   preview: string;
+  //2CCC- criando uma variavel para %, dpeois volte pra função upload
+  percentDone = 0;
+
 
   //7FF - criar no construtod o photoService
   //8FF- router depois vai para photo.form.module.ts
@@ -51,13 +55,33 @@ export class PhotoFormComponent implements OnInit {
 
     //8FF- chama o metodo upload passando seus parametros e depois chama o router no construtor 
     //10FF-  termina de fazer a função a partir do .subscribe. depois vai para photo.componene.ts
-    this.photoService.upload(description, allowComments, this.file).subscribe(() => {
-      //31BB- fazer a linha debaixo para mostrar o alert quando o upload tiver sido realizado. depois vá para alert.service.ts
-      this.alertService.success('Upload complete', true);
-      //32DD- mudar a parte do navigate([""]); para ....., dpois vá para app.routing.module.ts
-      this.router.navigate(["/user", this.userService.getUserName()]);
-    });
+    //2BBB- altere essa parte quase toda para a parte de baixo
+                  // this.photoService.upload(description, allowComments, this.file).subscribe(() => {
+                  //   //31BB- fazer a linha debaixo para mostrar o alert quando o upload tiver sido realizado. depois vá para alert.service.ts
+                  //   this.alertService.success('Upload complete', true);
+                  //   //32DD- mudar a parte do navigate([""]); para ....., dpois vá para app.routing.module.ts
+                  //   this.router.navigate(["/user", this.userService.getUserName()]);
+                  // });
+    //2BBB- altere essa parte quase toda para a parte de baixo, depois crie uma variavel para a %
+     this.photoService.upload(description, allowComments, this.file).subscribe((event: HttpEvent<any>) => {
+       if(event.type == HttpEventType.UploadProgress){
+         //2CCC- fazer o calculo para a % de carregamento da imagem 
+         this.percentDone = Math.round(100 * event.loaded / event.total);
 
+       }else if(event.type == HttpEventType.Response){
+          //31BB- fazer a linha debaixo para mostrar o alert quando o upload tiver sido realizado. depois vá para alert.service.ts
+          this.alertService.success('Upload complete', true);
+          //32DD- mudar a parte do navigate([""]); para ....., dpois vá para app.routing.module.ts
+          this.router.navigate(["/user", this.userService.getUserName()]);
+      }     
+    },
+    //2DDD- fazer o callback de error para a imagem, depois vá para o photo-form.component.html
+        err => {
+          console.log(err);
+          this.alertService.danger('Upload error!', true);
+          this.router.navigate(["/user", this.userService.getUserName()]);
+        }
+    );
   }
 
   //17BB- criando o metodo handleFile e depois cria a preview do tipo string

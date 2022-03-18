@@ -1,4 +1,4 @@
-import {  map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { PhotoComment } from './photo-comment';
 import { Photo } from './photo';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -33,7 +33,13 @@ export class PhotoService {
     formData.append('allowComments', allowComments ? 'true' : 'false');
     formData.append('imageFile', file);
 
-    return this.http.post(`${API}/photos/upload`, formData);
+    return this.http.post(`${API}/photos/upload`, formData,
+    //2AAA- MOSTRANDO A BARRA DE UPLOAD DA IMAGEM
+    //2AAA- passa mais um parametro, dpeois vá para photo-form.component.ts
+      {
+        observe: 'events',
+        reportProgress: true
+      });
   }
 
   //21AA- criando metodo para achar o id, voltei para photo.details.componenet.ts
@@ -47,22 +53,22 @@ export class PhotoService {
   }
 
   //24AA- criando o metodo addComment, depois volte para photo-comments.component.ts
-  addComment(photoId: number, commentText: string){
-    return this.http.post(`${API}/photos/${photoId}/comments`, {commentText: commentText});
+  addComment(photoId: number, commentText: string) {
+    return this.http.post(`${API}/photos/${photoId}/comments`, { commentText: commentText });
   }
 
   //27BB- criando o metodo delete, depois volte para photos-details.component.ts
-  removePhoto(photoId: number){
+  removePhoto(photoId: number) {
     return this.http.delete(`${API}/photos/${photoId}`);
   }
 
   //34AA- criando o metodo like, para ter acesso ao codigo de status, ao cabeçalho temos que usar o observe: 'responde' , depois vá para photo-details.compoenent.ts
-  like(photoId: number){
-    return this.http.post(`${API}/photos/${photoId}/like`,{}, {observe: 'response'})
-    .pipe(map(res => true))
-    .pipe(catchError(err => {
-      return err.status == '304' ? of(false) : throwError(() => err);
-    }));
+  like(photoId: number) {
+    return this.http.post(`${API}/photos/${photoId}/like`, {}, { observe: 'response' })
+      .pipe(map(res => true))
+      .pipe(catchError(err => {
+        return err.status == '304' ? of(false) : throwError(() => err);
+      }));
   }
 
 }

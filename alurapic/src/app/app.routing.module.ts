@@ -39,20 +39,33 @@ const routes: Routes = [
     component: PhotoListComponent,
     resolve: {
       photos: PhotoListResolver
+    },
+    //1AAA- começando a fazer o title mudar de acordo com a rota
+    data: {
+      title: 'Timeline'
     }
   },
   {
     path: 'p/add',
     component: PhotoFormComponent,
-    canActivate: [AuthGuard] //19BB- adiciona essa linha de comando para a rota p/add, depois foi criado um component chamado photo-details, vá para photo.module.ts
+    canActivate: [AuthGuard], //19BB- adiciona essa linha de comando para a rota p/add, depois foi criado um component chamado photo-details, vá para photo.module.ts
+    data: { //1BBB- fazendo essa rota ganhar o title abaixo
+      title: 'Photo upload'
+    }
   },
   {
     path: 'p/:photoId', //19DD- criar essa rota, usando o :photoId como coringa (para acessar a rota do id da imagem quando clicado), para isso vá ate photo-list-module.ts
     component: PhotoDetailsComponent,
+    data: { //1CCC- fazendo essa rota ganhar o title abaixo
+      title: 'Photo detail'
+    }
   },
   {
     path: 'not-found', //33AA- criando essa rota 
-    component: NotFoundComponent
+    component: NotFoundComponent,
+    data: { //1DDD- fazendo essa rota ganhar o title abaixo, depois vá para home.routing.module.ts pra arrumar as rotas de la tambem
+      title: 'Not found'
+    }
   },
   {
     path: '**',

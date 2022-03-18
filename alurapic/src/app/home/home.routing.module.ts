@@ -16,10 +16,16 @@ const routes: Routes = [
             {
                 path: '',
                 component: SignInComponent,
+                data: { //1EEE- fazendo o title pra essa rota
+                    title: 'Sing in'
+                }
             },
             {
                 path: 'singup',
-                component: SingupComponent//55B- rota feita para o singup, depois vamos mexer no singup.ts
+                component: SingupComponent, //55B- rota feita para o singup, depois vamos mexer no singup.ts
+                data: { //1FFF- fazendo o title pra essa rota, depois precisamos interagir com o angula pra saber qual rota está, para isso vá para app.component.ts
+                    title: 'Sing up'
+                }
             },
         ]
     },
