@@ -2,7 +2,7 @@
 <header class="fixed-top font-monospace">
   <div class="border-bottom border-3">
     <nav class="navbar navbar-light bg-white">
-      <a class="navbar-brand mx-2">ALURAPIC</a>
+      <a [routerLink]="['']" class="navbar-brand mx-2">ALURAPIC</a>
       <!-- 49B- vai ser usao o ngIf para mostrar o nome do usuario sempre que estiver logado -->
       <!-- 50A- vai pegar o user$ e aplicar o pipe async e tratar ele como user, quando voce aplicar esse async no template o angular vai pegar o valor da incrição do obervable... 
     como se ele fizesse o subscrible pra voce , pegasse o valor e te dava ele direto. Agora vamos fazer o logout (user.service.t)  -->
@@ -22,5 +22,9 @@
         </span>
       </ng-template>
     </nav>
-    </div>
+  </div>
+  <!-- 30AA- chamando o alert no header, depois vá para photo-details.component.ts -->
+  <div class="fixed-top">
+    <app-alert class=""></app-alert>
+  </div>
 </header>

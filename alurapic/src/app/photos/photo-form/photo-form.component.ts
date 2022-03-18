@@ -1,7 +1,9 @@
+import { AlertService } from './../../shared/components/alert/alert.service';
 import { Router } from '@angular/router';
 import { PhotoService } from './../photo/photo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-photo-form',
@@ -20,10 +22,14 @@ export class PhotoFormComponent implements OnInit {
 
   //7FF - criar no construtod o photoService
   //8FF- router depois vai para photo.form.module.ts
+  //31AA- chamar o alerService
+  //32CC- chamar o userService
   constructor(
     private formBuilder: FormBuilder,
     private photoService: PhotoService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService,
+    private userService: UserService
   ) { }
 
   //2EE- fazendo a validação do formulario, depois vá para photo-form.component.html
@@ -45,7 +51,13 @@ export class PhotoFormComponent implements OnInit {
 
     //8FF- chama o metodo upload passando seus parametros e depois chama o router no construtor 
     //10FF-  termina de fazer a função a partir do .subscribe. depois vai para photo.componene.ts
-    this.photoService.upload(description, allowComments, this.file).subscribe(() => this.router.navigate([""]));
+    this.photoService.upload(description, allowComments, this.file).subscribe(() => {
+      //31BB- fazer a linha debaixo para mostrar o alert quando o upload tiver sido realizado. depois vá para alert.service.ts
+      this.alertService.success('Upload complete', true);
+      //32DD- mudar a parte do navigate([""]); para ....., dpois vá para app.routing.module.ts
+      this.router.navigate(["/user", this.userService.getUserName()]);
+    });
+
   }
 
   //17BB- criando o metodo handleFile e depois cria a preview do tipo string

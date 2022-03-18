@@ -1,4 +1,6 @@
-import { PhotoComment } from './../photo/photo-comment';
+import { UserService } from './../../core/user/user.service';
+import { AlertService } from './../../shared/components/alert/alert.service';
+
 import { Observable } from 'rxjs';
 import { PhotoService } from './../photo/photo.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +28,13 @@ export class PhotoDetailsComponent implements OnInit {
   //21BB- chama o photoservice e crie uma propriedade
   //20CC- chamando o route
   //27EE- chama o router, depois criar uma pasta no photo-details de photo-owner-only e criar a directive
-  constructor(private route: ActivatedRoute, private photoService: PhotoService, private router: Router) { }
+  //30BB- chamar o alertService
+  //32AA- chamar o userService
+  constructor(private route: ActivatedRoute,
+    private photoService: PhotoService,
+    private router: Router,
+    private alertService: AlertService,
+    private userService: UserService) { }
 
   //20DD- o id recebe o id da foto que o usuario clicou, o photoId tem que ser o mesmo da rota p/:photoId no app.routing.module.ts, depois vai para photo;service;ts
   ngOnInit() {
@@ -38,15 +46,47 @@ export class PhotoDetailsComponent implements OnInit {
     //21GG- mude a linha de cima para a de baixo, depois volte para photo-details.component.ts
     //22LL- mudando para this.photoId. Feito isso vá para o tempalte dos comentarios em photo-comments.component.html
     this.photo$ = this.photoService.findById(this.photoId);
-
+    //32EE- tratar um erro que possa ter, depois vá para pohoto-details.component.html
+    this.photo$.subscribe({
+      next: () => {
+      },
+      error: err => {
+        console.log(err);
+        this.router.navigate(['not-found']);
+      }
+    }
+    );
     //22DD- passando os valores para coments$, depois vai ser criando um component pra listar todos os comentarios 
     //this.comments$ = this.photoService.getComments(photoId);
   }
 
   //27DD- fazer o metodo remove, mas chamar o router antes logo a cima
   remove() {
-    this.photoService.removePhoto(this.photoId).subscribe(() => this.router.navigate(['']));
-   }
+    this.photoService.removePhoto(this.photoId).subscribe({
+      next: () => {
+        //30CC- chamar o alertService aqui. depois vá para photo-form.component.ts
+        this.alertService.success('Photo removed!', true);
+        //32BB- alterar a navigate , de navigate(['']); para ... , depois vá para photo-form.component.ts
+        this.router.navigate(['/user', this.userService.getUserName()]);
+      },
+      error: err => {
+        console.log(err);
+        this.alertService.warning('Could not delete the photo!', true);
+      },
+    });
+  }
+
+
+  //34BB- criando o metodo like, depois vá para o photo-details.componenet.html
+  like (photo: Photo){
+    this.photoService.like(photo.id).subscribe(liked => {
+      if(liked){
+        this.photo$ = this.photoService.findById(photo.id);
+      }
+    })
+  }
 
 
 }
+
+

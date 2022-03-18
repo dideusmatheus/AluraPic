@@ -62,9 +62,12 @@ export class SingupComponent implements OnInit {
         ]
       ]
     });
+  }
 
-    //59I- copiando o codigo para realizar o focus no email ao iniciar, depois vamos fazer a impleentação do Lazy loading... vá para app.rount.module.ts
-    //this.platformDetectorService.isPlatformBrowser() && this.emailInput.nativeElement['focus()'];
+  //59I- copiando o codigo para realizar o focus no email ao iniciar, depois vamos fazer a impleentação do Lazy loading... vá para app.rount.module.ts
+  ngAfterViewInit(): void {
+    this.platformDetectorService.isPlatformBrowser() && this.emailInput.nativeElement['focus()'];
+
   }
 
 

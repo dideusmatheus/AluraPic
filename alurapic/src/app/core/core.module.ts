@@ -1,3 +1,5 @@
+import { AlertModule } from './../shared/components/alert/alert.module';
+
 import { FooterComponent } from './footer/footer.component';
 import { RequestInterceptor } from './auth/request.interceptor';
 import { RouterModule } from '@angular/router';
@@ -7,10 +9,12 @@ import { HeaderComponent } from './header/header.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
+
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        AlertModule, //29GG- importar o alertModule depois volte para alert.component.ts
     ],
     declarations: [
         HeaderComponent,
@@ -18,7 +22,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ],
     exports: [
         HeaderComponent,
-        FooterComponent //1CD- exportando o footer, depois vá ate o app.component.html
+        FooterComponent, //1CD- exportando o footer, depois vá ate o app.component.html
     ],
 
     //62C- faça o providers

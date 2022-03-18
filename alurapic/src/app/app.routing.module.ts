@@ -51,8 +51,12 @@ const routes: Routes = [
     component: PhotoDetailsComponent,
   },
   {
-    path: '**',
+    path: 'not-found', //33AA- criando essa rota 
     component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found' //33BB- mudar component: NotFoundComponent para ... depois volte para photo-details.component.ts
   }
 ];
 

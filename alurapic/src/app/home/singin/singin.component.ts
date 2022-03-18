@@ -22,12 +22,11 @@ export class SignInComponent implements OnInit {
             userName: ['', Validators.required],
             password: ['', Validators.required]
         });
-        //59E- copiando o codigo a baixo e colando aqui, depois vamos fazer o focus para o signup, vá para o singup.html
-        this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
     }
 
+    //59E- copiando o codigo a baixo e colando aqui, depois vamos fazer o focus para o signup, vá para o singup.html
     ngAfterViewInit() {
-
+        this.platformDetectorService.isPlatformBrowser() && this.userNameInput.nativeElement.focus();
     }
 
     login() {
@@ -36,7 +35,7 @@ export class SignInComponent implements OnInit {
         this.authService.authenticate(userName, password).subscribe({
             next: () => {
                 this.router.navigate(['user', userName]);
-            },            
+            },
 
             error: err => {
                 console.log(err);

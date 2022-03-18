@@ -12,7 +12,8 @@ import { PhotoDetailsModule } from './photo-details/photo-details.module';
     PhotoFormModule,
     PhotoListModule,
     ImmediateClickModule,
-    PhotoDetailsModule //19CC- importar esse module, depois ir ate app.roiuting.module.ts
+    PhotoDetailsModule, //19CC- importar esse module, depois ir ate app.roiuting.module.ts
+    
   ]
 })
 export class PhotosModule { }

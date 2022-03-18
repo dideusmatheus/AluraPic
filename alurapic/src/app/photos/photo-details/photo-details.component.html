@@ -3,23 +3,31 @@
 <div class="bg-white my-3 mx-4" *ngIf="(photo$ | async) as photo">
 
   <div class="row font-monospace">
-    <div class="col-6 my-2">
+    <div class="col-6 my-2 img-fluid mw-100 d-sm-block text-center">
       <app-photo [url]="photo.url" [description]="photo.description"></app-photo>
     </div>
 
-    <div class="col-6 text-center">
+    <div class="col-6 text-center ">
       <small>
-        <p class=" break-word mx-2 fs-2"> {{photo.description}}</p>
+        <p class=" break-word mx-2 fs-2 "> {{photo.description}}</p>
         <!-- 27AA- BOTÃO DE DELETE IMAGE -->
         <!-- 27AA- colocando o botao(icone) de deletar icone e de comentarios, utilizando o template abaixo, depois vamos criar o metodo delete em photo.service.ts-->
         <!-- 27CC- coloque o (click)="remove()", depois vá para photo-details.component.ts -->
         <div class="d-flex bd-highlight align-bottom">
-          <i class="fa fa-comment-o fa-2x mx-1 text-primary bd-highlight"></i> 
-          <i class=" mx-1 bd-highlight fs-4">{{ photo.comments }}</i>
+          <i class="fa fa-comment-o fa-2x mx-2 text-success"></i>
+          <i class="font-monospace mx-1 bd-highlight fs-4">{{ photo.comments }} </i>
+          <!-- 33AA- COMEÇANDO A PARTE DE CURTIDA DAS FOTOS -->
+          <!-- 33AA- colocando o icone de curtidas, depois crie a directive show-if-logged e chana ela no photo-details.module.ts  -->
+          <!-- 33EE- colocar o appShowIfLogged nos i para realizar a directive, vá para photo.service.ts -->
+          <!-- 34CC- coloque o (click)="like(photo)" no icone de coração -->
+            <i (click)="like(photo)" appShowIfLogged class="fa fa-heart-o fa-2x text-success mx-1"> </i>
+            <i appShowIfLogged class="mx-1 bd-highlight fs-4">{{ photo.likes }}</i>
           <!-- 28CC- incluir photoOwnerOnly [ownedPhoto]="photo", depois ir ate photo-owner-only.directive -->
-          <i photoOwnerOnly [ownedPhoto]="photo" (click)="remove()" class="fa fa-trash-o fa-2x text-danger ms-auto p-2 bd-highlight"></i>
-      </div>
-      <hr>
+          <i photoOwnerOnly [ownedPhoto]="photo" (click)="remove()"
+            class="fa fa-trash-o fa-2x text-danger ms-auto p-2 bd-highlight" data-toggle="tooltip"
+            data-placement="bottom" title="Delete image"></i>
+        </div>
+        <hr>
       </small>
 
       <!-- 26AA- PERMISSÃO DE COMENTARIOS -->

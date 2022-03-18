@@ -22,9 +22,10 @@ export class PhotoCommentsComponent implements OnInit {
   //23EE- criar o commentForm
   commentForm: FormGroup;
 
+
   //22HH- chamando o serviço
   //23DD- charar o formbuilder
-  constructor(private photoService: PhotoService, private formBuilder: FormBuilder,private router: Router) { }
+  constructor(private photoService: PhotoService, private formBuilder: FormBuilder, private router: Router) { }
 
 
   //22II- recebendo os comentarios, depois declara e exporta ele no photo-details.module.ts
@@ -35,17 +36,19 @@ export class PhotoCommentsComponent implements OnInit {
     this.commentForm = this.formBuilder.group({
       comment: ['', Validators.maxLength(300)]
     })
-    
   }
 
-  //24BB- criar o metodo para salar o comentario, depois importar o switchmap laa em cima, depois vá para photo-list-component.ts
+
+
+
+  //24BB- criar o metodo para salar o comentario, depois importar o switchmap la em cima, depois vá para photo-list-component.ts
   save() {
     const comment = this.commentForm.get('comment').value as string;
     this.comments$ = this.photoService.addComment(this.photoId, comment).pipe(switchMap(() => this.photoService.getComments(this.photoId)))
       .pipe(tap(() => {
         this.commentForm.reset();
-        alert('Comentário adicionado com sucesso!')
-      }))
+        alert('Comentário adicionado com sucesso!');
+      }));
   }
 
 

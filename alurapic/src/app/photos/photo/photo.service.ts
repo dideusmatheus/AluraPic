@@ -1,7 +1,9 @@
+import {  map, catchError } from 'rxjs/operators';
 import { PhotoComment } from './photo-comment';
 import { Photo } from './photo';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { of, throwError } from 'rxjs';
 
 const API = 'http://localhost:3000';
 
@@ -52,6 +54,15 @@ export class PhotoService {
   //27BB- criando o metodo delete, depois volte para photos-details.component.ts
   removePhoto(photoId: number){
     return this.http.delete(`${API}/photos/${photoId}`);
+  }
+
+  //34AA- criando o metodo like, para ter acesso ao codigo de status, ao cabeçalho temos que usar o observe: 'responde' , depois vá para photo-details.compoenent.ts
+  like(photoId: number){
+    return this.http.post(`${API}/photos/${photoId}/like`,{}, {observe: 'response'})
+    .pipe(map(res => true))
+    .pipe(catchError(err => {
+      return err.status == '304' ? of(false) : throwError(() => err);
+    }));
   }
 
 }
