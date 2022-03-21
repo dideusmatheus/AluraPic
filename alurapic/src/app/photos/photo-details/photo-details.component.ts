@@ -67,7 +67,9 @@ export class PhotoDetailsComponent implements OnInit {
         //30CC- chamar o alertService aqui. depois vá para photo-form.component.ts
         this.alertService.success('Photo removed!', true);
         //32BB- alterar a navigate , de navigate(['']); para ... , depois vá para photo-form.component.ts
-        this.router.navigate(['/user', this.userService.getUserName()]);
+        //12AAA- REMOVENDO A ROTA DA HISTORY API
+        //12AAA- adiciona o replaceurl, depois vá para auth.guard.ts
+        this.router.navigate(['/user', this.userService.getUserName()], {replaceUrl: true});
       },
       error: err => {
         console.log(err);

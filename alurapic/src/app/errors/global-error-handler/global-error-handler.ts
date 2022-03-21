@@ -32,7 +32,7 @@ export class GlobalErrorHandler implements ErrorHandler {
             ? error.message :
             error.toString();
 
-        //11FFF-direciona para o /error
+        //11FFF-direciona para o /error, depois vá para photo-details.component.ts
         router.navigate(['/error']);
         
         //9CCC- fazendo a linha de baixo para mostrar o erro  
