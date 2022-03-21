@@ -20,7 +20,7 @@ export class ShowIfLoggedDirective implements OnInit {
 
   //33CC- fazendo a comparação se o usuario nao estiver logado não vai aparecer os likes
   ngOnInit(): void {
-    //8BBB- faz a seguinte parte do codigo 
+    //8BBB- faz a seguinte parte do codigo, depois vamos tratar do error na aplicação e para isso foi criado o global-error-handleer.ts 
     this.currentDisplay = getComputedStyle(this.element.nativeElement).display;
         this.userService.getUser().subscribe(user => {
             if(user) {

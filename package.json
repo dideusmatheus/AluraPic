@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/stacktrace-js": "^2.0.3",
+    "stacktrace-js": "^2.0.2"
+  }
+}

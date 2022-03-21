@@ -1,3 +1,4 @@
+import { GlobalErrorComponent } from './errors/global-error/global-error.component';
 import { PhotoDetailsComponent } from './photos/photo-details/photo-details.component';
 import { AuthGuard } from './core/auth/auth.guard';
 
@@ -58,6 +59,13 @@ const routes: Routes = [
     component: PhotoDetailsComponent,
     data: { //1CCC- fazendo essa rota ganhar o title abaixo
       title: 'Photo detail'
+    }
+  },
+  {
+    path: 'error', //11DDD- criando a rota de error, depois vá para global-error-handler.ts
+    component: GlobalErrorComponent,
+    data: { 
+      title: 'Error'
     }
   },
   {
