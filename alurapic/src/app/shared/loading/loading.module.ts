@@ -9,7 +9,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     declarations: [LoadingComponent],
     exports: [LoadingComponent],
     imports: [CommonModule],
-    //4DDD- fazer o providers
+    //5DDD- fazer o providers, depois vai ser criado o menu, vá para menu.component.ts
     providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: LoadingInterceptor,

@@ -1,0 +1,11 @@
+<!-- 6EEE- criando o template do menu, depois vai para menu.component.scss-->
+<!-- 6GGG- coloque o [ngClass]="{ 'active-menu': isShown}" e (click)="toggle()" -->
+<div [ngClass]="{ 'active-menu': isShown}">
+  <div class="menu-bar">
+    <!-- 7BBB- coloque o tabindex="0" (keyup.space)="toggle()" , depois será feito o menu em header.compnent.hmtl-->
+      <i tabindex="0" (keyup.space)="toggle()" class="fa fa-window-close" (click)="toggle()"></i>
+      <ng-content></ng-content>
+  </div>
+  <!-- 6HHH- criando o overlay, depois vai ser feito a unteração do teclado com o menu lateral em header.component.html -->
+  <div class="overlay" (click)="toggle()"></div>
+</div>

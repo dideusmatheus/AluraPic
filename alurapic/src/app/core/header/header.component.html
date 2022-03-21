@@ -2,7 +2,21 @@
 <header class="fixed-top font-monospace">
   <div class="border-bottom border-3">
     <nav class="navbar navbar-light bg-white">
-      <a [routerLink]="['']" class="navbar-brand mx-2">ALURAPIC</a>
+      <div>
+        <!-- 7AAA- interação do teclado com o menu, coloque o tabindex="0" e  (keyup.space)="menu.toggle()" e deopis volte para o menu.com-onent.html-->
+        <i tabindex="0" (keyup.space)="menu.toggle()" (click)="menu.toggle()" class="fa fa-bars mx-2"></i>
+        <a [routerLink]="['']" class="navbar-brand mx-2">ALURAPIC</a>
+        <!-- 6DDD- colocando o menu, coloque a tag i, depois vamos criar o menu em menu.component.hmtl  -->
+        <app-menu #menu>
+           <!-- 7CCC- criando o menu, depois vá para o core.module.ts  -->
+          <ul class="list-unstyled">
+            <li>
+              <!-- 7EEE- coloque o showIfLogged, depois vá para show-if-logged-diretive.ts -->
+              <a class="my-5" showIfLogged [routerLink]="['p','add']">Upload</a>
+            </li>
+          </ul>
+        </app-menu>
+      </div>
       <!-- 49B- vai ser usao o ngIf para mostrar o nome do usuario sempre que estiver logado -->
       <!-- 50A- vai pegar o user$ e aplicar o pipe async e tratar ele como user, quando voce aplicar esse async no template o angular vai pegar o valor da incrição do obervable... 
     como se ele fizesse o subscrible pra voce , pegasse o valor e te dava ele direto. Agora vamos fazer o logout (user.service.t)  -->

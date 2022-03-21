@@ -12,19 +12,6 @@ export class LoadingInterceptor implements HttpInterceptor{
     constructor(private loadingService: LoadingService){}
 
     //5BBB- fazer o metodo abaixo, depois vá para loading.module.ts
-    // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //     return next
-    //             .handle(req)
-    //             .pipe(tap(event => {
-    //                 if(event instanceof HttpResponse) {
-    //                     this.loadingService.stop();
-    //                 } else {
-    //                     this.loadingService.start();
-    //                 }
-    //             }))
-    
-    // }
-
     intercept(req: HttpRequest<any>, next: HttpHandler): 
         Observable<HttpSentEvent | 
         HttpHeaderResponse | 
